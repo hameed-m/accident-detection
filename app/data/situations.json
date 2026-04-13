@@ -1,0 +1,63 @@
+[
+  {
+    "id": "s1",
+    "agencyId": "1",
+    "status": "active",
+    "location": "King Fahd Road, Exit 4",
+    "severity": "High",
+    "confidence": "98%",
+    "detectedAt": "2026-04-13T13:45:00Z",
+    "vehiclesInvolved": 2,
+    "description": "Frontal collision detected via intersection camera."
+  },
+  {
+    "id": "s2",
+    "agencyId": "1",
+    "status": "handled",
+    "location": "Prince Turki St",
+    "severity": "Medium",
+    "confidence": "85%",
+    "detectedAt": "2026-04-12T15:30:00Z",
+    "handledAt": "2026-04-12T16:15:00Z",
+    "vehiclesInvolved": 1,
+    "description": "Vehicle skidded off road. Minor barriers hit.",
+    "notes": "Ambulance dispatched. Driver treated on site."
+  },
+  {
+    "id": "s3",
+    "agencyId": "2",
+    "status": "active",
+    "location": "Dhahran Highway Km 12",
+    "severity": "Critical",
+    "confidence": "99%",
+    "detectedAt": "2026-04-13T13:58:00Z",
+    "vehiclesInvolved": 3,
+    "description": "Multi-vehicle pileup detected by drone patrol."
+  },
+  {
+    "id": "s4",
+    "agencyId": "2",
+    "status": "handled",
+    "location": "Corniche Road",
+    "severity": "Low",
+    "confidence": "70%",
+    "detectedAt": "2026-04-12T09:10:00Z",
+    "handledAt": "2026-04-12T09:45:00Z",
+    "vehiclesInvolved": 2,
+    "description": "Rear-end collision at traffic light.",
+    "notes": "Cleared road safely. Reports filed."
+  },
+  {
+    "id": "s5",
+    "agencyId": "1",
+    "status": "handled",
+    "location": "University Blvd",
+    "severity": "High",
+    "confidence": "94%",
+    "detectedAt": "2026-04-11T20:20:00Z",
+    "handledAt": "2026-04-11T21:00:00Z",
+    "vehiclesInvolved": 2,
+    "description": "Intersection T-bone crash.",
+    "notes": "One individual transported to ER."
+  }
+]

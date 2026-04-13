@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "King Fahd Hospital Emergency",
+    "type": "Medical",
+    "vacancies": 5,
+    "handledSituationsCount": 142
+  },
+  {
+    "id": "2",
+    "name": "Almana General Hospital",
+    "type": "Medical",
+    "vacancies": 12,
+    "handledSituationsCount": 89
+  },
+  {
+    "id": "3",
+    "name": "Mouwasat Hospital Dammam",
+    "type": "Medical",
+    "vacancies": 3,
+    "handledSituationsCount": 210
+  },
+  {
+    "id": "4",
+    "name": "Red Crescent Dammam",
+    "type": "Medical",
+    "vacancies": 8,
+    "handledSituationsCount": 420
+  }
+]
