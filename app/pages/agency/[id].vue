@@ -1,117 +1,160 @@
 <template>
-  <div class="animate-slide-up">
-    <!-- Breadcrumb and Agency Header -->
-    <div class="agency-header">
-      <NuxtLink to="/" class="back-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        Back to Dashboard
-      </NuxtLink>
-      
-      <div v-if="agency" class="header-content">
-        <div class="title-wrap">
-          <h1 class="page-title">{{ agency.name }}</h1>
+  <div class="animate-slide-up space-y-10 font-sans">
+    <div class="max-w-7xl mx-auto space-y-10">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <div>
+          <UButton to="/" icon="i-lucide-arrow-left" color="neutral" variant="ghost" label="Back to Dashboard" class="-ml-2.5 mb-4 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" />
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            {{ agency?.name }}
+          </h1>
+          <p class="text-slate-600 dark:text-slate-400 mt-3 text-lg max-w-2xl">Specialized Emergency Response Agency</p>
         </div>
-        <div class="header-stats glass-panel">
-          <div class="h-stat">
-            <span class="label">Units Available</span>
-            <span class="val text-success">{{ agency.vacancies }}</span>
-          </div>
-          <div class="h-stat">
-            <span class="label">Total Handled</span>
-            <span class="val">{{ agency.handledSituationsCount }}</span>
-          </div>
+        
+        <div class="flex flex-wrap gap-4">
+          <UCard :ui="{ root: 'min-w-[200px] border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md shadow-sm' }">
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl">
+                <UIcon name="i-lucide-check-circle" class="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Units Available</p>
+                <p class="text-3xl font-black text-slate-900 dark:text-white">{{ agency?.vacancies }}</p>
+              </div>
+            </div>
+          </UCard>
+          
+          <UCard :ui="{ root: 'min-w-[200px] border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md shadow-sm' }">
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-blue-50 dark:bg-blue-500/10 rounded-xl">
+                <UIcon name="i-lucide-activity" class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Total Handled</p>
+                <p class="text-3xl font-black text-slate-900 dark:text-white">{{ agency?.handledSituationsCount }}</p>
+              </div>
+            </div>
+          </UCard>
         </div>
+      </div>
+
+      <!-- Active Situations -->
+      <div class="space-y-6">
+        <div class="flex items-center gap-3">
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Active Emergencies</h2>
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          </span>
+        </div>
+
+        <div v-if="activeSituations.length === 0" class="flex flex-col items-center justify-center py-20 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+          <UIcon name="i-lucide-shield-check" class="w-16 h-16 text-emerald-500 dark:text-emerald-400 mb-4 opacity-80" />
+          <p class="text-xl font-bold text-slate-700 dark:text-slate-300">All clear</p>
+          <p class="text-slate-500 dark:text-slate-400 mt-2">No active emergencies at the moment.</p>
+        </div>
+
+        <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <UCard 
+            v-for="sit in activeSituations" 
+            :key="sit.id"
+            :ui="{ 
+              root: 'border border-red-200 dark:border-red-900/30 bg-gradient-to-br from-red-50/50 to-white/80 dark:from-red-950/20 dark:to-slate-900/80 shadow-lg shadow-red-500/5 dark:shadow-red-900/5 hover:border-red-300 dark:hover:border-red-500/30 transition-all duration-300',
+              header: 'border-b border-slate-100 dark:border-slate-800/50 pb-4 pt-5 px-6',
+              body: 'pt-5 px-6',
+              footer: 'border-t border-slate-100 dark:border-slate-800/50 bg-white/50 dark:bg-slate-900/30 py-4 px-6'
+            }"
+          >
+            <template #header>
+              <div class="flex justify-between items-center">
+                <UBadge color="error" variant="soft" icon="i-lucide-alert-triangle" size="md" class="rounded-full font-semibold">
+                  Critical Alert
+                </UBadge>
+                <span class="text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <UIcon name="i-lucide-clock" class="w-4 h-4" />
+                  {{ new Date(sit.detectedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+                </span>
+              </div>
+            </template>
+
+            <div class="mb-8">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-start gap-3">
+                <UIcon name="i-lucide-map-pin" class="w-6 h-6 text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
+                {{ sit.location }}
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed pl-9">{{ sit.description }}</p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 ml-9">
+              <div class="bg-white/80 dark:bg-slate-800/50 rounded-xl p-3.5 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col items-center justify-center text-center">
+                <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1.5">Severity</p>
+                <p class="font-black text-slate-900 dark:text-white">{{ sit.severity }}</p>
+              </div>
+              <div class="bg-white/80 dark:bg-slate-800/50 rounded-xl p-3.5 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col items-center justify-center text-center">
+                <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1.5">Vehicles</p>
+                <p class="font-black text-slate-900 dark:text-white">{{ sit.vehiclesInvolved }}</p>
+              </div>
+              <div class="bg-white/80 dark:bg-slate-800/50 rounded-xl p-3.5 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col items-center justify-center text-center">
+                <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1.5">Confidence</p>
+                <p class="font-black text-slate-900 dark:text-white">{{ sit.confidence }}</p>
+              </div>
+            </div>
+
+            <template #footer>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <UButton 
+                  color="error" 
+                  variant="solid"
+                  icon="i-lucide-truck" 
+                  class="flex-1 justify-center py-2.5 text-base font-bold shadow-md shadow-red-500/20"
+                  @click="handleSituation(sit.id)"
+                >
+                  Dispatch Units
+                </UButton>
+                <UButton 
+                  color="neutral" 
+                  variant="soft" 
+                  icon="i-lucide-x" 
+                  class="flex-1 justify-center py-2.5 text-base font-bold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700"
+                  @click="ignoreSituation(sit.id)"
+                >
+                  False Alarm
+                </UButton>
+              </div>
+            </template>
+          </UCard>
+        </div>
+      </div>
+
+      <!-- Handled Situations Section -->
+      <div class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Handled Situations Log</h2>
+
+        <UCard :ui="{ root: 'border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md shadow-sm overflow-hidden', body: 'p-0 sm:p-0' }">
+          <div v-if="handledSituations.length === 0" class="text-center py-16">
+            <UIcon name="i-lucide-history" class="w-16 h-16 mx-auto text-slate-400 dark:text-slate-600 mb-4" />
+            <p class="text-lg font-bold text-slate-700 dark:text-slate-300">No History</p>
+            <p class="text-slate-500 dark:text-slate-500 mt-2">There are no handled situations to display yet.</p>
+          </div>
+
+          <UTable 
+            v-else 
+            :data="handledSituations" 
+            :columns="logColumns"
+            :ui="{ 
+              th: 'text-slate-500 dark:text-slate-400 text-xs font-bold tracking-wider uppercase bg-slate-50/80 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 py-4 px-6',
+              td: 'text-sm text-slate-700 dark:text-slate-300 py-4 px-6 border-b border-slate-100 dark:border-slate-800/50',
+              tr: 'hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors'
+            }"
+          />
+        </UCard>
       </div>
     </div>
-
-    <!-- Active Situations Section -->
-    <section class="mb-5">
-      <div class="section-title-wrap">
-        <h2 class="section-title">Active Emergency Situations</h2>
-        <span class="pulse-indicator"></span>
-      </div>
-      
-      <div v-if="activeSituations.length === 0" class="empty-state glass-panel">
-        <p>No active situations at the moment. All clear.</p>
-      </div>
-      
-      <div v-else class="grid grid-cols-2">
-        <div 
-          v-for="sit in activeSituations" 
-          :key="sit.id" 
-          class="glass-panel situation-card active-card"
-        >
-          <div class="sit-header">
-            <span class="badge badge-active">Critical Alert</span>
-            <span class="time">{{ new Date(sit.detectedAt).toLocaleTimeString() }}</span>
-          </div>
-          
-          <h3 class="location">{{ sit.location }}</h3>
-          <p class="description">{{ sit.description }}</p>
-          
-          <div class="sit-details">
-            <div class="detail-item">
-              <span class="d-label">Severity</span>
-              <span class="d-val">{{ sit.severity }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="d-label">Vehicles Involved</span>
-              <span class="d-val">{{ sit.vehiclesInvolved }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="d-label">AI Confidence</span>
-              <span class="d-val">{{ sit.confidence }}</span>
-            </div>
-          </div>
-          
-          <div class="action-bar">
-            <button class="btn btn-primary" @click="handleSituation(sit.id)">Dispatch Units</button>
-            <button class="btn btn-outline" @click="ignoreSituation(sit.id)">False Alarm</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Logs List (Handled Situations) -->
-    <section>
-      <h2 class="section-title">Handled Situations Log</h2>
-      
-      <div v-if="handledSituations.length === 0" class="empty-state glass-panel">
-        <p>No logged activities found.</p>
-      </div>
-      
-      <div v-else class="logs-container glass-panel">
-        <table class="logs-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Location</th>
-              <th>Severity</th>
-              <th>Detected At</th>
-              <th>Handled At</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="log in handledSituations" :key="log.id">
-              <td class="id-col">#{{ log.id }}</td>
-              <td class="loc-col">{{ log.location }}</td>
-              <td><span :class="['severity-dot', log.severity.toLowerCase()]"></span>{{ log.severity }}</td>
-              <td class="text-muted">{{ new Date(log.detectedAt).toLocaleString() }}</td>
-              <td class="text-muted">{{ log.handledAt ? new Date(log.handledAt).toLocaleString() : 'N/A' }}</td>
-              <td><span class="badge badge-handled">Handled</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, h, resolveComponent } from 'vue'
 import { useRoute } from 'nuxt/app'
 import agenciesData from '~/data/agencies.json'
 import situationsData from '~/data/situations.json'
@@ -125,286 +168,105 @@ const agency = computed(() => agenciesData.find(a => a.id === agencyId))
 // In a real app, these would come from an API and be updated locally
 const allSituations = ref(situationsData)
 
-const agencySituations = computed(() => 
+const agencySituations = computed(() =>
   allSituations.value.filter(s => s.agencyId === agencyId)
 )
 
-const activeSituations = computed(() => 
+const activeSituations = computed(() =>
   agencySituations.value.filter(s => s.status === 'active')
 )
 
-const handledSituations = computed(() => 
-  agencySituations.value.filter(s => s.status === 'handled').sort((a,b) => new Date(b.detectedAt) - new Date(a.detectedAt))
+const handledSituations = computed(() =>
+  agencySituations.value
+    .filter(s => s.status === 'handled')
+    .sort((a, b) => new Date(b.detectedAt).getTime() - new Date(a.detectedAt).getTime())
 )
+
+// Severity badge color mapping
+const severityBadgeColor = (severity) => {
+  const level = severity?.toLowerCase()
+  if (level === 'high' || level === 'critical') return 'error'
+  if (level === 'medium') return 'warning'
+  return 'success'
+}
+
+const UBadge = resolveComponent('UBadge')
+
+const logColumns = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    cell: ({ row }) => h('span', { class: 'font-mono text-slate-500 dark:text-slate-400' }, `#${row.original.id}`)
+  },
+  {
+    accessorKey: 'location',
+    header: 'Location',
+    cell: ({ row }) => h('span', { class: 'font-semibold text-slate-900 dark:text-white' }, row.original.location)
+  },
+  {
+    accessorKey: 'severity',
+    header: 'Severity',
+    cell: ({ row }) =>
+      h(UBadge, {
+        color: severityBadgeColor(row.original.severity),
+        variant: 'soft',
+        size: 'sm',
+        label: row.original.severity,
+        class: 'rounded-full px-2.5'
+      })
+  },
+  {
+    accessorKey: 'detectedAt',
+    header: 'Detected At',
+    cell: ({ row }) =>
+      h('span', { class: 'text-slate-600 dark:text-slate-400' }, new Date(row.original.detectedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }))
+  },
+  {
+    accessorKey: 'handledAt',
+    header: 'Handled At',
+    cell: ({ row }) =>
+      h(
+        'span',
+        { class: 'text-slate-600 dark:text-slate-400' },
+        row.original.handledAt ? new Date(row.original.handledAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'N/A'
+      )
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: () =>
+      h(UBadge, {
+        color: 'success',
+        variant: 'subtle',
+        size: 'sm',
+        label: 'Handled',
+        class: 'rounded-full px-2.5'
+      })
+  }
+]
 
 // Mock Action Handlers
 const handleSituation = (id) => {
-  const index = allSituations.value.findIndex(s => s.id === id);
-  if(index !== -1) {
+  const index = allSituations.value.findIndex(s => s.id === id)
+  if (index !== -1) {
     allSituations.value[index] = {
       ...allSituations.value[index],
       status: 'handled',
       handledAt: new Date().toISOString(),
-      notes: "Handled from dashboard"
+      notes: 'Handled from dashboard'
     }
   }
 }
 
 const ignoreSituation = (id) => {
-  const index = allSituations.value.findIndex(s => s.id === id);
-  if(index !== -1) {
+  const index = allSituations.value.findIndex(s => s.id === id)
+  if (index !== -1) {
     allSituations.value[index] = {
       ...allSituations.value[index],
       status: 'handled',
       handledAt: new Date().toISOString(),
-      notes: "Marked as false alarm"
+      notes: 'Marked as false alarm'
     }
   }
 }
 </script>
-
-<style scoped>
-.mb-5 { margin-bottom: 3rem; }
-
-.agency-header {
-  margin-bottom: 3rem;
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  transition: color 0.2s;
-}
-
-.back-link:hover {
-  color: var(--text-primary);
-}
-
-.back-link svg {
-  width: 16px;
-  height: 16px;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  margin: 0;
-  background: linear-gradient(to right, #fff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.header-stats {
-  display: flex;
-  gap: 2rem;
-  padding: 1rem 2rem;
-}
-
-.h-stat {
-  display: flex;
-  flex-direction: column;
-}
-
-.h-stat .label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-bottom: 0.25rem;
-}
-
-.h-stat .val {
-  font-size: 1.5rem;
-  font-weight: 700;
-  font-family: var(--font-heading);
-}
-
-.text-success { color: var(--accent-success); }
-
-.section-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.pulse-indicator {
-  width: 12px;
-  height: 12px;
-  background: var(--status-active);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--status-active);
-  animation: pulse-danger 2s infinite;
-}
-
-.empty-state {
-  padding: 3rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-/* Active Situations Card */
-.active-card {
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  background: linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
-}
-
-.active-card:hover { border-color: rgba(239, 68, 68, 0.5); }
-
-.situation-card {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.sit-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.time {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.location {
-  font-size: 1.25rem;
-  margin: 0;
-}
-
-.description {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.sit-details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  background: rgba(0,0,0,0.2);
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 0.5rem;
-}
-
-.detail-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.d-label {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.d-val {
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.action-bar {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  flex: 1;
-  font-family: var(--font-body);
-}
-
-.btn-primary {
-  background: var(--accent-primary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-}
-.btn-primary:hover {
-  background: #2563eb;
-  transform: translateY(-2px);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--glass-border);
-}
-.btn-outline:hover {
-  background: rgba(255,255,255,0.1);
-  color: white;
-}
-
-/* Logs Table */
-.logs-container {
-  overflow-x: auto;
-  padding: 1rem;
-}
-
-.logs-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.logs-table th {
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  padding: 1rem;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.logs-table td {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.02);
-  font-size: 0.95rem;
-}
-
-.logs-table tr:last-child td { border-bottom: none; }
-.logs-table tbody tr:hover { background: rgba(255,255,255,0.02); }
-
-.id-col { font-family: monospace; color: var(--text-muted); }
-.loc-col { font-weight: 500; }
-
-.severity-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-.severity-dot.high, .severity-dot.critical { background: var(--status-active); }
-.severity-dot.medium { background: var(--status-warning); }
-.severity-dot.low { background: var(--status-handled); }
-</style>

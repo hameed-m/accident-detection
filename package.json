@@ -8,18 +8,26 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "db:push": "prisma db push",
+    "studio": "prisma studio",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.101",
     "@iconify-json/simple-icons": "^1.2.77",
     "@nuxt/ui": "^4.6.1",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "mqtt": "^5.15.1",
     "nuxt": "^4.4.2",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
     "eslint": "^10.2.0",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "vue-tsc": "^3.2.6"
   },

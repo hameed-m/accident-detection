@@ -1,20 +1,10 @@
 <template>
-  <div>
-    <header class="glass-header">
-      <NuxtLink to="/" class="glass-header-brand">
-        AIoT Emergency Alert Dashboard
-      </NuxtLink>
-      <div style="display: flex; gap: 1rem; align-items: center;">
-        <div class="badge badge-active" style="animation: none; border-color: rgba(255,255,255,0.2); color: white; background: rgba(0,0,0,0.5);">
-          System Online
-        </div>
-      </div>
-    </header>
-
-    <main class="container">
+  <UApp>
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
       <NuxtPage />
-    </main>
-  </div>
+    </NuxtLayout>
+  </UApp>
 </template>
 
 <script setup>
@@ -25,15 +15,3 @@ useHead({
   ]
 })
 </script>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.3s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-</style>

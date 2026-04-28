@@ -1,39 +1,61 @@
 <template>
-  <div>
-    <div class="dashboard-header animate-slide-up">
-      <h1 class="page-title">Emergency Response Agencies</h1>
-      <p class="page-subtitle">Real-time overview of active response units and situations</p>
+  <div class="animate-slide-up space-y-8 sm:space-y-12">
+    <!-- Dashboard Header -->
+    <div class="mb-10 text-center sm:text-left flex flex-col items-center sm:items-start">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+        Emergency Response Agencies
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+        Real-time overview of active response units and situations across all specialized agencies.
+      </p>
     </div>
 
-    <div class="grid grid-cols-3 agency-grid">
+    <!-- Agency Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       <NuxtLink
         v-for="(agency, index) in agencies"
         :key="agency.id"
         :to="`/agency/${agency.id}`"
-        class="glass-panel agency-card"
+        class="group relative focus:outline-none"
         :style="{ animationDelay: `${index * 0.1}s` }"
       >
-        <div class="card-header">
-          <h2 class="agency-name">{{ agency.name }}</h2>
-        </div>
-        
-        <div class="stats-grid">
-          <div class="stat-box">
-            <span class="stat-label">Available Units</span>
-            <span class="stat-value text-accent">{{ agency.vacancies }}</span>
+        <UCard
+          :ui="{
+            root: 'h-full flex flex-col border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:border-primary-500/40 dark:hover:border-primary-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/10 group-hover:-translate-y-1.5 overflow-hidden',
+            header: 'pb-0 border-b-0 pt-6 px-6',
+            body: 'flex-1 pt-6 px-6',
+            footer: 'pt-4 pb-4 px-6 border-t border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/30'
+          }"
+        >
+          <template #header>
+            <div class="flex items-start justify-between">
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {{ agency.name }}
+              </h2>
+              <div class="p-2.5 bg-primary-50 dark:bg-primary-500/10 rounded-xl text-primary-600 dark:text-primary-400 shrink-0 transform transition-transform group-hover:scale-110">
+                <UIcon name="i-lucide-shield" class="w-6 h-6" />
+              </div>
+            </div>
+          </template>
+
+          <div class="grid grid-cols-2 gap-3 sm:gap-4 mt-2">
+            <div class="bg-white dark:bg-slate-800/40 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col justify-center">
+              <span class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Available</span>
+              <span class="text-3xl font-black text-primary-600 dark:text-primary-400">{{ agency.vacancies }}</span>
+            </div>
+            <div class="bg-white dark:bg-slate-800/40 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col justify-center">
+              <span class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Handled</span>
+              <span class="text-3xl font-black text-slate-800 dark:text-slate-100">{{ agency.handledSituationsCount }}</span>
+            </div>
           </div>
-          <div class="stat-box">
-            <span class="stat-label">Handled Situations</span>
-            <span class="stat-value">{{ agency.handledSituationsCount }}</span>
-          </div>
-        </div>
-        
-        <div class="card-footer">
-          <span>View Dashboard</span>
-          <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </div>
+          
+          <template #footer>
+            <div class="flex items-center justify-between text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <span>View Dashboard</span>
+              <UIcon name="i-lucide-arrow-right" class="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+            </div>
+          </template>
+        </UCard>
       </NuxtLink>
     </div>
   </div>
@@ -44,100 +66,3 @@ import agenciesData from '~/data/agencies.json'
 
 const agencies = agenciesData
 </script>
-
-<style scoped>
-.dashboard-header {
-  margin-bottom: 3rem;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.page-subtitle {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-.agency-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  text-decoration: none;
-  animation: slide-up 0.6s ease-out backwards;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-}
-
-.agency-name {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
-
-.stat-box {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-
-.stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: var(--font-heading);
-}
-
-.text-accent {
-  color: var(--accent-success);
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--glass-border);
-  color: var(--accent-primary);
-  font-weight: 500;
-}
-
-.chevron-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s;
-}
-
-.agency-card:hover .chevron-icon {
-  transform: translateX(4px);
-}
-</style>
