@@ -88,6 +88,7 @@ export const IncidentScalarFieldEnum = {
   id: 'id',
   cameraId: 'cameraId',
   severity: 'severity',
+  confidence: 'confidence',
   imageUrl: 'imageUrl',
   status: 'status',
   topic: 'topic',

@@ -28,16 +28,19 @@ export type AggregateIncident = {
 
 export type IncidentAvgAggregateOutputType = {
   severity: number | null
+  confidence: number | null
 }
 
 export type IncidentSumAggregateOutputType = {
   severity: number | null
+  confidence: number | null
 }
 
 export type IncidentMinAggregateOutputType = {
   id: string | null
   cameraId: string | null
   severity: number | null
+  confidence: number | null
   imageUrl: string | null
   status: $Enums.IncidentStatus | null
   topic: string | null
@@ -52,6 +55,7 @@ export type IncidentMaxAggregateOutputType = {
   id: string | null
   cameraId: string | null
   severity: number | null
+  confidence: number | null
   imageUrl: string | null
   status: $Enums.IncidentStatus | null
   topic: string | null
@@ -66,6 +70,7 @@ export type IncidentCountAggregateOutputType = {
   id: number
   cameraId: number
   severity: number
+  confidence: number
   imageUrl: number
   status: number
   topic: number
@@ -80,16 +85,19 @@ export type IncidentCountAggregateOutputType = {
 
 export type IncidentAvgAggregateInputType = {
   severity?: true
+  confidence?: true
 }
 
 export type IncidentSumAggregateInputType = {
   severity?: true
+  confidence?: true
 }
 
 export type IncidentMinAggregateInputType = {
   id?: true
   cameraId?: true
   severity?: true
+  confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
@@ -104,6 +112,7 @@ export type IncidentMaxAggregateInputType = {
   id?: true
   cameraId?: true
   severity?: true
+  confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
@@ -118,6 +127,7 @@ export type IncidentCountAggregateInputType = {
   id?: true
   cameraId?: true
   severity?: true
+  confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
@@ -219,6 +229,7 @@ export type IncidentGroupByOutputType = {
   id: string
   cameraId: string
   severity: number
+  confidence: number
   imageUrl: string
   status: $Enums.IncidentStatus
   topic: string
@@ -256,6 +267,7 @@ export type IncidentWhereInput = {
   id?: Prisma.StringFilter<"Incident"> | string
   cameraId?: Prisma.StringFilter<"Incident"> | string
   severity?: Prisma.IntFilter<"Incident"> | number
+  confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
@@ -271,6 +283,7 @@ export type IncidentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
@@ -289,6 +302,7 @@ export type IncidentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
   cameraId?: Prisma.StringFilter<"Incident"> | string
   severity?: Prisma.IntFilter<"Incident"> | number
+  confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
@@ -304,6 +318,7 @@ export type IncidentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
@@ -326,6 +341,7 @@ export type IncidentScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   cameraId?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   severity?: Prisma.IntWithAggregatesFilter<"Incident"> | number
+  confidence?: Prisma.IntWithAggregatesFilter<"Incident"> | number
   imageUrl?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusWithAggregatesFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringWithAggregatesFilter<"Incident"> | string
@@ -339,6 +355,7 @@ export type IncidentScalarWhereWithAggregatesInput = {
 export type IncidentCreateInput = {
   id?: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -354,6 +371,7 @@ export type IncidentUncheckedCreateInput = {
   id?: string
   cameraId: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -367,6 +385,7 @@ export type IncidentUncheckedCreateInput = {
 export type IncidentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -382,6 +401,7 @@ export type IncidentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cameraId?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -396,6 +416,7 @@ export type IncidentCreateManyInput = {
   id?: string
   cameraId: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -409,6 +430,7 @@ export type IncidentCreateManyInput = {
 export type IncidentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -423,6 +445,7 @@ export type IncidentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cameraId?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -447,6 +470,7 @@ export type IncidentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
@@ -459,12 +483,14 @@ export type IncidentCountOrderByAggregateInput = {
 
 export type IncidentAvgOrderByAggregateInput = {
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
 }
 
 export type IncidentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
@@ -479,6 +505,7 @@ export type IncidentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
@@ -491,6 +518,7 @@ export type IncidentMinOrderByAggregateInput = {
 
 export type IncidentSumOrderByAggregateInput = {
   severity?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
 }
 
 export type IncidentCreateNestedManyWithoutCameraInput = {
@@ -558,6 +586,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 export type IncidentCreateWithoutCameraInput = {
   id?: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -571,6 +600,7 @@ export type IncidentCreateWithoutCameraInput = {
 export type IncidentUncheckedCreateWithoutCameraInput = {
   id?: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -614,6 +644,7 @@ export type IncidentScalarWhereInput = {
   id?: Prisma.StringFilter<"Incident"> | string
   cameraId?: Prisma.StringFilter<"Incident"> | string
   severity?: Prisma.IntFilter<"Incident"> | number
+  confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
@@ -627,6 +658,7 @@ export type IncidentScalarWhereInput = {
 export type IncidentCreateManyCameraInput = {
   id?: string
   severity: number
+  confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
   topic: string
@@ -640,6 +672,7 @@ export type IncidentCreateManyCameraInput = {
 export type IncidentUpdateWithoutCameraInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -653,6 +686,7 @@ export type IncidentUpdateWithoutCameraInput = {
 export type IncidentUncheckedUpdateWithoutCameraInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -666,6 +700,7 @@ export type IncidentUncheckedUpdateWithoutCameraInput = {
 export type IncidentUncheckedUpdateManyWithoutCameraInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
@@ -682,6 +717,7 @@ export type IncidentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   cameraId?: boolean
   severity?: boolean
+  confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
@@ -697,6 +733,7 @@ export type IncidentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   cameraId?: boolean
   severity?: boolean
+  confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
@@ -712,6 +749,7 @@ export type IncidentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   cameraId?: boolean
   severity?: boolean
+  confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
@@ -727,6 +765,7 @@ export type IncidentSelectScalar = {
   id?: boolean
   cameraId?: boolean
   severity?: boolean
+  confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
@@ -737,7 +776,7 @@ export type IncidentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "severity" | "imageUrl" | "status" | "topic" | "detectedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
+export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "severity" | "confidence" | "imageUrl" | "status" | "topic" | "detectedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
 export type IncidentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
 }
@@ -757,6 +796,7 @@ export type $IncidentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     cameraId: string
     severity: number
+    confidence: number
     imageUrl: string
     status: $Enums.IncidentStatus
     topic: string
@@ -1192,6 +1232,7 @@ export interface IncidentFieldRefs {
   readonly id: Prisma.FieldRef<"Incident", 'String'>
   readonly cameraId: Prisma.FieldRef<"Incident", 'String'>
   readonly severity: Prisma.FieldRef<"Incident", 'Int'>
+  readonly confidence: Prisma.FieldRef<"Incident", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"Incident", 'String'>
   readonly status: Prisma.FieldRef<"Incident", 'IncidentStatus'>
   readonly topic: Prisma.FieldRef<"Incident", 'String'>

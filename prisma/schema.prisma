@@ -7,13 +7,6 @@ datasource db {
     provider = "postgresql"
 }
 
-enum IncidentStatus {
-    UNHANDLED
-    DISPATCHED
-    RESOLVED
-    FALSE_ALARM
-}
-
 model CameraNode {
     id          String     @id @default(uuid())
     locationTag String
@@ -26,15 +19,23 @@ model CameraNode {
     updatedAt DateTime @updatedAt
 }
 
+enum IncidentStatus {
+    UNHANDLED
+    DISPATCHED
+    RESOLVED
+    FALSE_ALARM
+}
+
 model Incident {
     id       String     @id @default(uuid())
     cameraId String
     camera   CameraNode @relation(fields: [cameraId], references: [id])
 
-    severity Int
-    imageUrl String
-    status   IncidentStatus @default(UNHANDLED)
-    topic    String
+    severity   Int
+    confidence Int
+    imageUrl   String
+    status     IncidentStatus @default(UNHANDLED)
+    topic      String
 
     detectedAt DateTime  @default(now())
     resolvedAt DateTime?
