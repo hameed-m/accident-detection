@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   CameraNode: 'CameraNode',
-  Incident: 'Incident'
+  Incident: 'Incident',
+  EmergencyAgency: 'EmergencyAgency'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "cameraNode" | "incident"
+    modelProps: "cameraNode" | "incident" | "emergencyAgency"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EmergencyAgency: {
+      payload: Prisma.$EmergencyAgencyPayload<ExtArgs>
+      fields: Prisma.EmergencyAgencyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmergencyAgencyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmergencyAgencyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        findFirst: {
+          args: Prisma.EmergencyAgencyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmergencyAgencyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        findMany: {
+          args: Prisma.EmergencyAgencyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>[]
+        }
+        create: {
+          args: Prisma.EmergencyAgencyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        createMany: {
+          args: Prisma.EmergencyAgencyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmergencyAgencyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>[]
+        }
+        delete: {
+          args: Prisma.EmergencyAgencyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        update: {
+          args: Prisma.EmergencyAgencyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmergencyAgencyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmergencyAgencyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmergencyAgencyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmergencyAgencyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyAgencyPayload>
+        }
+        aggregate: {
+          args: Prisma.EmergencyAgencyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmergencyAgency>
+        }
+        groupBy: {
+          args: Prisma.EmergencyAgencyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmergencyAgencyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmergencyAgencyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmergencyAgencyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -608,11 +683,13 @@ export type CameraNodeScalarFieldEnum = (typeof CameraNodeScalarFieldEnum)[keyof
 export const IncidentScalarFieldEnum = {
   id: 'id',
   cameraId: 'cameraId',
+  agencyId: 'agencyId',
   severity: 'severity',
   confidence: 'confidence',
   imageUrl: 'imageUrl',
   status: 'status',
   topic: 'topic',
+  location: 'location',
   detectedAt: 'detectedAt',
   resolvedAt: 'resolvedAt',
   notes: 'notes',
@@ -621,6 +698,18 @@ export const IncidentScalarFieldEnum = {
 } as const
 
 export type IncidentScalarFieldEnum = (typeof IncidentScalarFieldEnum)[keyof typeof IncidentScalarFieldEnum]
+
+
+export const EmergencyAgencyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vacancies: 'vacancies',
+  topic: 'topic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmergencyAgencyScalarFieldEnum = (typeof EmergencyAgencyScalarFieldEnum)[keyof typeof EmergencyAgencyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -841,6 +930,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   cameraNode?: Prisma.CameraNodeOmit
   incident?: Prisma.IncidentOmit
+  emergencyAgency?: Prisma.EmergencyAgencyOmit
 }
 
 /* Types for Logging */

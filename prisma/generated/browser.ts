@@ -27,3 +27,8 @@ export type CameraNode = Prisma.CameraNodeModel
  * 
  */
 export type Incident = Prisma.IncidentModel
+/**
+ * Model EmergencyAgency
+ * 
+ */
+export type EmergencyAgency = Prisma.EmergencyAgencyModel

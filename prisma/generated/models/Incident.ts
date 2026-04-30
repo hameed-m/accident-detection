@@ -39,11 +39,13 @@ export type IncidentSumAggregateOutputType = {
 export type IncidentMinAggregateOutputType = {
   id: string | null
   cameraId: string | null
+  agencyId: string | null
   severity: number | null
   confidence: number | null
   imageUrl: string | null
   status: $Enums.IncidentStatus | null
   topic: string | null
+  location: string | null
   detectedAt: Date | null
   resolvedAt: Date | null
   notes: string | null
@@ -54,11 +56,13 @@ export type IncidentMinAggregateOutputType = {
 export type IncidentMaxAggregateOutputType = {
   id: string | null
   cameraId: string | null
+  agencyId: string | null
   severity: number | null
   confidence: number | null
   imageUrl: string | null
   status: $Enums.IncidentStatus | null
   topic: string | null
+  location: string | null
   detectedAt: Date | null
   resolvedAt: Date | null
   notes: string | null
@@ -69,11 +73,13 @@ export type IncidentMaxAggregateOutputType = {
 export type IncidentCountAggregateOutputType = {
   id: number
   cameraId: number
+  agencyId: number
   severity: number
   confidence: number
   imageUrl: number
   status: number
   topic: number
+  location: number
   detectedAt: number
   resolvedAt: number
   notes: number
@@ -96,11 +102,13 @@ export type IncidentSumAggregateInputType = {
 export type IncidentMinAggregateInputType = {
   id?: true
   cameraId?: true
+  agencyId?: true
   severity?: true
   confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
+  location?: true
   detectedAt?: true
   resolvedAt?: true
   notes?: true
@@ -111,11 +119,13 @@ export type IncidentMinAggregateInputType = {
 export type IncidentMaxAggregateInputType = {
   id?: true
   cameraId?: true
+  agencyId?: true
   severity?: true
   confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
+  location?: true
   detectedAt?: true
   resolvedAt?: true
   notes?: true
@@ -126,11 +136,13 @@ export type IncidentMaxAggregateInputType = {
 export type IncidentCountAggregateInputType = {
   id?: true
   cameraId?: true
+  agencyId?: true
   severity?: true
   confidence?: true
   imageUrl?: true
   status?: true
   topic?: true
+  location?: true
   detectedAt?: true
   resolvedAt?: true
   notes?: true
@@ -228,11 +240,13 @@ export type IncidentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type IncidentGroupByOutputType = {
   id: string
   cameraId: string
+  agencyId: string | null
   severity: number
   confidence: number
   imageUrl: string
   status: $Enums.IncidentStatus
   topic: string
+  location: string
   detectedAt: Date
   resolvedAt: Date | null
   notes: string | null
@@ -266,33 +280,39 @@ export type IncidentWhereInput = {
   NOT?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
   id?: Prisma.StringFilter<"Incident"> | string
   cameraId?: Prisma.StringFilter<"Incident"> | string
+  agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
+  location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   camera?: Prisma.XOR<Prisma.CameraNodeScalarRelationFilter, Prisma.CameraNodeWhereInput>
+  agency?: Prisma.XOR<Prisma.EmergencyAgencyNullableScalarRelationFilter, Prisma.EmergencyAgencyWhereInput> | null
 }
 
 export type IncidentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
+  agencyId?: Prisma.SortOrderInput | Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   camera?: Prisma.CameraNodeOrderByWithRelationInput
+  agency?: Prisma.EmergencyAgencyOrderByWithRelationInput
 }
 
 export type IncidentWhereUniqueInput = Prisma.AtLeast<{
@@ -301,27 +321,32 @@ export type IncidentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.IncidentWhereInput[]
   NOT?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
   cameraId?: Prisma.StringFilter<"Incident"> | string
+  agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
+  location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   camera?: Prisma.XOR<Prisma.CameraNodeScalarRelationFilter, Prisma.CameraNodeWhereInput>
+  agency?: Prisma.XOR<Prisma.EmergencyAgencyNullableScalarRelationFilter, Prisma.EmergencyAgencyWhereInput> | null
 }, "id">
 
 export type IncidentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
+  agencyId?: Prisma.SortOrderInput | Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -340,11 +365,13 @@ export type IncidentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.IncidentScalarWhereWithAggregatesInput | Prisma.IncidentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   cameraId?: Prisma.StringWithAggregatesFilter<"Incident"> | string
+  agencyId?: Prisma.StringNullableWithAggregatesFilter<"Incident"> | string | null
   severity?: Prisma.IntWithAggregatesFilter<"Incident"> | number
   confidence?: Prisma.IntWithAggregatesFilter<"Incident"> | number
   imageUrl?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusWithAggregatesFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringWithAggregatesFilter<"Incident"> | string
+  location?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeWithAggregatesFilter<"Incident"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Incident"> | string | null
@@ -358,23 +385,27 @@ export type IncidentCreateInput = {
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   camera: Prisma.CameraNodeCreateNestedOneWithoutIncidentsInput
+  agency?: Prisma.EmergencyAgencyCreateNestedOneWithoutIncidentsInput
 }
 
 export type IncidentUncheckedCreateInput = {
   id?: string
   cameraId: string
+  agencyId?: string | null
   severity: number
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
@@ -389,22 +420,26 @@ export type IncidentUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   camera?: Prisma.CameraNodeUpdateOneRequiredWithoutIncidentsNestedInput
+  agency?: Prisma.EmergencyAgencyUpdateOneWithoutIncidentsNestedInput
 }
 
 export type IncidentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -415,11 +450,13 @@ export type IncidentUncheckedUpdateInput = {
 export type IncidentCreateManyInput = {
   id?: string
   cameraId: string
+  agencyId?: string | null
   severity: number
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
@@ -434,6 +471,7 @@ export type IncidentUpdateManyMutationInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -444,11 +482,13 @@ export type IncidentUpdateManyMutationInput = {
 export type IncidentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -469,11 +509,13 @@ export type IncidentOrderByRelationAggregateInput = {
 export type IncidentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
+  agencyId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -489,11 +531,13 @@ export type IncidentAvgOrderByAggregateInput = {
 export type IncidentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
+  agencyId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -504,11 +548,13 @@ export type IncidentMaxOrderByAggregateInput = {
 export type IncidentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cameraId?: Prisma.SortOrder
+  agencyId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   topic?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -583,27 +629,73 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type IncidentCreateNestedManyWithoutAgencyInput = {
+  create?: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput> | Prisma.IncidentCreateWithoutAgencyInput[] | Prisma.IncidentUncheckedCreateWithoutAgencyInput[]
+  connectOrCreate?: Prisma.IncidentCreateOrConnectWithoutAgencyInput | Prisma.IncidentCreateOrConnectWithoutAgencyInput[]
+  createMany?: Prisma.IncidentCreateManyAgencyInputEnvelope
+  connect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+}
+
+export type IncidentUncheckedCreateNestedManyWithoutAgencyInput = {
+  create?: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput> | Prisma.IncidentCreateWithoutAgencyInput[] | Prisma.IncidentUncheckedCreateWithoutAgencyInput[]
+  connectOrCreate?: Prisma.IncidentCreateOrConnectWithoutAgencyInput | Prisma.IncidentCreateOrConnectWithoutAgencyInput[]
+  createMany?: Prisma.IncidentCreateManyAgencyInputEnvelope
+  connect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+}
+
+export type IncidentUpdateManyWithoutAgencyNestedInput = {
+  create?: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput> | Prisma.IncidentCreateWithoutAgencyInput[] | Prisma.IncidentUncheckedCreateWithoutAgencyInput[]
+  connectOrCreate?: Prisma.IncidentCreateOrConnectWithoutAgencyInput | Prisma.IncidentCreateOrConnectWithoutAgencyInput[]
+  upsert?: Prisma.IncidentUpsertWithWhereUniqueWithoutAgencyInput | Prisma.IncidentUpsertWithWhereUniqueWithoutAgencyInput[]
+  createMany?: Prisma.IncidentCreateManyAgencyInputEnvelope
+  set?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  disconnect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  delete?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  connect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  update?: Prisma.IncidentUpdateWithWhereUniqueWithoutAgencyInput | Prisma.IncidentUpdateWithWhereUniqueWithoutAgencyInput[]
+  updateMany?: Prisma.IncidentUpdateManyWithWhereWithoutAgencyInput | Prisma.IncidentUpdateManyWithWhereWithoutAgencyInput[]
+  deleteMany?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
+}
+
+export type IncidentUncheckedUpdateManyWithoutAgencyNestedInput = {
+  create?: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput> | Prisma.IncidentCreateWithoutAgencyInput[] | Prisma.IncidentUncheckedCreateWithoutAgencyInput[]
+  connectOrCreate?: Prisma.IncidentCreateOrConnectWithoutAgencyInput | Prisma.IncidentCreateOrConnectWithoutAgencyInput[]
+  upsert?: Prisma.IncidentUpsertWithWhereUniqueWithoutAgencyInput | Prisma.IncidentUpsertWithWhereUniqueWithoutAgencyInput[]
+  createMany?: Prisma.IncidentCreateManyAgencyInputEnvelope
+  set?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  disconnect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  delete?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  connect?: Prisma.IncidentWhereUniqueInput | Prisma.IncidentWhereUniqueInput[]
+  update?: Prisma.IncidentUpdateWithWhereUniqueWithoutAgencyInput | Prisma.IncidentUpdateWithWhereUniqueWithoutAgencyInput[]
+  updateMany?: Prisma.IncidentUpdateManyWithWhereWithoutAgencyInput | Prisma.IncidentUpdateManyWithWhereWithoutAgencyInput[]
+  deleteMany?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
+}
+
 export type IncidentCreateWithoutCameraInput = {
   id?: string
   severity: number
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  agency?: Prisma.EmergencyAgencyCreateNestedOneWithoutIncidentsInput
 }
 
 export type IncidentUncheckedCreateWithoutCameraInput = {
   id?: string
+  agencyId?: string | null
   severity: number
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
@@ -643,11 +735,13 @@ export type IncidentScalarWhereInput = {
   NOT?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
   id?: Prisma.StringFilter<"Incident"> | string
   cameraId?: Prisma.StringFilter<"Incident"> | string
+  agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
   imageUrl?: Prisma.StringFilter<"Incident"> | string
   status?: Prisma.EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
   topic?: Prisma.StringFilter<"Incident"> | string
+  location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
@@ -655,13 +749,73 @@ export type IncidentScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
 }
 
-export type IncidentCreateManyCameraInput = {
+export type IncidentCreateWithoutAgencyInput = {
   id?: string
   severity: number
   confidence: number
   imageUrl: string
   status?: $Enums.IncidentStatus
-  topic: string
+  topic?: string
+  location?: string
+  detectedAt?: Date | string
+  resolvedAt?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  camera: Prisma.CameraNodeCreateNestedOneWithoutIncidentsInput
+}
+
+export type IncidentUncheckedCreateWithoutAgencyInput = {
+  id?: string
+  cameraId: string
+  severity: number
+  confidence: number
+  imageUrl: string
+  status?: $Enums.IncidentStatus
+  topic?: string
+  location?: string
+  detectedAt?: Date | string
+  resolvedAt?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IncidentCreateOrConnectWithoutAgencyInput = {
+  where: Prisma.IncidentWhereUniqueInput
+  create: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput>
+}
+
+export type IncidentCreateManyAgencyInputEnvelope = {
+  data: Prisma.IncidentCreateManyAgencyInput | Prisma.IncidentCreateManyAgencyInput[]
+  skipDuplicates?: boolean
+}
+
+export type IncidentUpsertWithWhereUniqueWithoutAgencyInput = {
+  where: Prisma.IncidentWhereUniqueInput
+  update: Prisma.XOR<Prisma.IncidentUpdateWithoutAgencyInput, Prisma.IncidentUncheckedUpdateWithoutAgencyInput>
+  create: Prisma.XOR<Prisma.IncidentCreateWithoutAgencyInput, Prisma.IncidentUncheckedCreateWithoutAgencyInput>
+}
+
+export type IncidentUpdateWithWhereUniqueWithoutAgencyInput = {
+  where: Prisma.IncidentWhereUniqueInput
+  data: Prisma.XOR<Prisma.IncidentUpdateWithoutAgencyInput, Prisma.IncidentUncheckedUpdateWithoutAgencyInput>
+}
+
+export type IncidentUpdateManyWithWhereWithoutAgencyInput = {
+  where: Prisma.IncidentScalarWhereInput
+  data: Prisma.XOR<Prisma.IncidentUpdateManyMutationInput, Prisma.IncidentUncheckedUpdateManyWithoutAgencyInput>
+}
+
+export type IncidentCreateManyCameraInput = {
+  id?: string
+  agencyId?: string | null
+  severity: number
+  confidence: number
+  imageUrl: string
+  status?: $Enums.IncidentStatus
+  topic?: string
+  location?: string
   detectedAt?: Date | string
   resolvedAt?: Date | string | null
   notes?: string | null
@@ -676,20 +830,24 @@ export type IncidentUpdateWithoutCameraInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agency?: Prisma.EmergencyAgencyUpdateOneWithoutIncidentsNestedInput
 }
 
 export type IncidentUncheckedUpdateWithoutCameraInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -699,11 +857,77 @@ export type IncidentUncheckedUpdateWithoutCameraInput = {
 
 export type IncidentUncheckedUpdateManyWithoutCameraInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
   topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IncidentCreateManyAgencyInput = {
+  id?: string
+  cameraId: string
+  severity: number
+  confidence: number
+  imageUrl: string
+  status?: $Enums.IncidentStatus
+  topic?: string
+  location?: string
+  detectedAt?: Date | string
+  resolvedAt?: Date | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IncidentUpdateWithoutAgencyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  camera?: Prisma.CameraNodeUpdateOneRequiredWithoutIncidentsNestedInput
+}
+
+export type IncidentUncheckedUpdateWithoutAgencyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IncidentUncheckedUpdateManyWithoutAgencyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  severity?: Prisma.IntFieldUpdateOperationsInput | number
+  confidence?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -716,59 +940,70 @@ export type IncidentUncheckedUpdateManyWithoutCameraInput = {
 export type IncidentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cameraId?: boolean
+  agencyId?: boolean
   severity?: boolean
   confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
+  location?: boolean
   detectedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }, ExtArgs["result"]["incident"]>
 
 export type IncidentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cameraId?: boolean
+  agencyId?: boolean
   severity?: boolean
   confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
+  location?: boolean
   detectedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }, ExtArgs["result"]["incident"]>
 
 export type IncidentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cameraId?: boolean
+  agencyId?: boolean
   severity?: boolean
   confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
+  location?: boolean
   detectedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }, ExtArgs["result"]["incident"]>
 
 export type IncidentSelectScalar = {
   id?: boolean
   cameraId?: boolean
+  agencyId?: boolean
   severity?: boolean
   confidence?: boolean
   imageUrl?: boolean
   status?: boolean
   topic?: boolean
+  location?: boolean
   detectedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
@@ -776,30 +1011,36 @@ export type IncidentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "severity" | "confidence" | "imageUrl" | "status" | "topic" | "detectedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
+export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "agencyId" | "severity" | "confidence" | "imageUrl" | "status" | "topic" | "location" | "detectedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
 export type IncidentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }
 export type IncidentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }
 export type IncidentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
+  agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
 }
 
 export type $IncidentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Incident"
   objects: {
     camera: Prisma.$CameraNodePayload<ExtArgs>
+    agency: Prisma.$EmergencyAgencyPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     cameraId: string
+    agencyId: string | null
     severity: number
     confidence: number
     imageUrl: string
     status: $Enums.IncidentStatus
     topic: string
+    location: string
     detectedAt: Date
     resolvedAt: Date | null
     notes: string | null
@@ -1200,6 +1441,7 @@ readonly fields: IncidentFieldRefs;
 export interface Prisma__IncidentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   camera<T extends Prisma.CameraNodeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CameraNodeDefaultArgs<ExtArgs>>): Prisma.Prisma__CameraNodeClient<runtime.Types.Result.GetResult<Prisma.$CameraNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  agency<T extends Prisma.Incident$agencyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Incident$agencyArgs<ExtArgs>>): Prisma.Prisma__EmergencyAgencyClient<runtime.Types.Result.GetResult<Prisma.$EmergencyAgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1231,11 +1473,13 @@ export interface Prisma__IncidentClient<T, Null = never, ExtArgs extends runtime
 export interface IncidentFieldRefs {
   readonly id: Prisma.FieldRef<"Incident", 'String'>
   readonly cameraId: Prisma.FieldRef<"Incident", 'String'>
+  readonly agencyId: Prisma.FieldRef<"Incident", 'String'>
   readonly severity: Prisma.FieldRef<"Incident", 'Int'>
   readonly confidence: Prisma.FieldRef<"Incident", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"Incident", 'String'>
   readonly status: Prisma.FieldRef<"Incident", 'IncidentStatus'>
   readonly topic: Prisma.FieldRef<"Incident", 'String'>
+  readonly location: Prisma.FieldRef<"Incident", 'String'>
   readonly detectedAt: Prisma.FieldRef<"Incident", 'DateTime'>
   readonly resolvedAt: Prisma.FieldRef<"Incident", 'DateTime'>
   readonly notes: Prisma.FieldRef<"Incident", 'String'>
@@ -1639,6 +1883,25 @@ export type IncidentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Incidents to delete.
    */
   limit?: number
+}
+
+/**
+ * Incident.agency
+ */
+export type Incident$agencyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmergencyAgency
+   */
+  select?: Prisma.EmergencyAgencySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmergencyAgency
+   */
+  omit?: Prisma.EmergencyAgencyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmergencyAgencyInclude<ExtArgs> | null
+  where?: Prisma.EmergencyAgencyWhereInput
 }
 
 /**

@@ -1,9 +1,10 @@
 import mqtt from "mqtt";
 
 export default defineNitroPlugin((nitroApp) => {
+  console.log("nitro plugin for mqtt is running");
   const prisma = usePrisma();
   // Connect to your Coolify broker (use your IP or domain)
-  const client = mqtt.connect("mqtt://72.62.50.78:8883");
+  const client = mqtt.connect("mqtts://broker.hivemq.com:8883");
 
   client.on("connect", () => {
     console.log("✅ Nuxt Background Worker: Connected to MQTT Broker");
@@ -24,6 +25,7 @@ export default defineNitroPlugin((nitroApp) => {
           cameraId: data.device_id,
           severity: data.severity,
           imageUrl: data.image_url,
+          confidence: data.confidence,
           topic: topic,
           status: "UNHANDLED",
         },

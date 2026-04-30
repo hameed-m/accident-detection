@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient, IncidentStatus } from "./generated/client";
+import { PrismaClient, IncidentStatus, CameraNode } from "./generated/client";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
@@ -66,6 +66,7 @@ async function seedIncidents(cameras: CameraNode[]) {
         severity: 2, // Medium
         confidence: 85,
         status: IncidentStatus.RESOLVED, // handled -> RESOLVED
+        agencyId: "1",
         topic: `incidents/camera/${camera2.id}`,
         imageUrl: "https://placehold.co/600x400/png?text=Vehicle+Skid",
         detectedAt: new Date("2026-04-12T15:30:00Z"),
@@ -87,6 +88,7 @@ async function seedIncidents(cameras: CameraNode[]) {
         severity: 1, // Low
         confidence: 70,
         status: IncidentStatus.RESOLVED, // handled -> RESOLVED
+        agencyId: "2",
         topic: `incidents/camera/${camera2.id}`,
         imageUrl: "https://placehold.co/600x400/png?text=Rear-End+Collision",
         detectedAt: new Date("2026-04-12T09:10:00Z"),
@@ -98,6 +100,7 @@ async function seedIncidents(cameras: CameraNode[]) {
         severity: 3, // High
         confidence: 94,
         status: IncidentStatus.RESOLVED, // handled -> RESOLVED
+        agencyId: "1",
         topic: `incidents/camera/${camera1.id}`,
         imageUrl: "https://placehold.co/600x400/png?text=T-Bone+Crash",
         detectedAt: new Date("2026-04-11T20:20:00Z"),
@@ -110,14 +113,50 @@ async function seedIncidents(cameras: CameraNode[]) {
   console.log("Created 5 incidents.");
 }
 
+async function seedAgencies() {
+  console.log("Seeding agencies...");
+  await prisma.emergencyAgency.deleteMany();
+
+  const agenciesData = [
+    {
+      id: "1",
+      name: "King Fahd Hospital Emergency",
+      vacancies: 5,
+    },
+    {
+      id: "2",
+      name: "Almana General Hospital",
+      vacancies: 12,
+    },
+    {
+      id: "3",
+      name: "Mouwasat Hospital Dammam",
+      vacancies: 3,
+    },
+    {
+      id: "4",
+      name: "Red Crescent Dammam",
+      vacancies: 8,
+    },
+  ];
+
+  await prisma.emergencyAgency.createMany({
+    data: agenciesData,
+  });
+
+  console.log(`Created ${agenciesData.length} agencies.`);
+}
+
 async function main() {
   console.log("Starting seed process...");
 
   // Note: Clear incidents first to avoid foreign key constraint errors
   await prisma.incident.deleteMany();
   await prisma.cameraNode.deleteMany();
+  await prisma.emergencyAgency.deleteMany();
 
   const cameras = await seedCameras();
+  await seedAgencies();
   await seedIncidents(cameras);
 
   console.log("Database seeded successfully.");

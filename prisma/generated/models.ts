@@ -10,4 +10,5 @@
  */
 export type * from './models/CameraNode.js'
 export type * from './models/Incident.js'
+export type * from './models/EmergencyAgency.js'
 export type * from './commonInputTypes.js'

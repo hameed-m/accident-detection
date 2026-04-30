@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   CameraNode: 'CameraNode',
-  Incident: 'Incident'
+  Incident: 'Incident',
+  EmergencyAgency: 'EmergencyAgency'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,11 +88,13 @@ export type CameraNodeScalarFieldEnum = (typeof CameraNodeScalarFieldEnum)[keyof
 export const IncidentScalarFieldEnum = {
   id: 'id',
   cameraId: 'cameraId',
+  agencyId: 'agencyId',
   severity: 'severity',
   confidence: 'confidence',
   imageUrl: 'imageUrl',
   status: 'status',
   topic: 'topic',
+  location: 'location',
   detectedAt: 'detectedAt',
   resolvedAt: 'resolvedAt',
   notes: 'notes',
@@ -100,6 +103,18 @@ export const IncidentScalarFieldEnum = {
 } as const
 
 export type IncidentScalarFieldEnum = (typeof IncidentScalarFieldEnum)[keyof typeof IncidentScalarFieldEnum]
+
+
+export const EmergencyAgencyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vacancies: 'vacancies',
+  topic: 'topic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmergencyAgencyScalarFieldEnum = (typeof EmergencyAgencyScalarFieldEnum)[keyof typeof EmergencyAgencyScalarFieldEnum]
 
 
 export const SortOrder = {

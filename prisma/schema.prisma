@@ -31,15 +31,31 @@ model Incident {
     cameraId String
     camera   CameraNode @relation(fields: [cameraId], references: [id])
 
+    agencyId String?
+    agency   EmergencyAgency? @relation(fields: [agencyId], references: [id])
+
     severity   Int
     confidence Int
     imageUrl   String
     status     IncidentStatus @default(UNHANDLED)
-    topic      String
+    topic      String         @default("nws7D1IJ/sa/ep/#")
+    location   String         @default("N/A")
 
     detectedAt DateTime  @default(now())
     resolvedAt DateTime?
     notes      String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model EmergencyAgency {
+    id        String @id @default(uuid())
+    name      String
+    vacancies Int
+    topic     String @default("nws7D1IJ/sa/ep/#")
+
+    incidents Incident[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
