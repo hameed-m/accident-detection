@@ -14,6 +14,7 @@ model CameraNode {
     longitude   Float
     isActive    Boolean    @default(true)
     incidents   Incident[]
+    topic       String     @default("nws7D1IJ/sa/ep/#")
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -41,9 +42,10 @@ model Incident {
     topic      String         @default("nws7D1IJ/sa/ep/#")
     location   String         @default("N/A")
 
-    detectedAt DateTime  @default(now())
-    resolvedAt DateTime?
-    notes      String?
+    detectedAt   DateTime  @default(now())
+    dispatchedAt DateTime?
+    resolvedAt   DateTime?
+    notes        String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

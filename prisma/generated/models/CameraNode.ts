@@ -42,6 +42,7 @@ export type CameraNodeMinAggregateOutputType = {
   latitude: number | null
   longitude: number | null
   isActive: boolean | null
+  topic: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +53,7 @@ export type CameraNodeMaxAggregateOutputType = {
   latitude: number | null
   longitude: number | null
   isActive: boolean | null
+  topic: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +64,7 @@ export type CameraNodeCountAggregateOutputType = {
   latitude: number
   longitude: number
   isActive: number
+  topic: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -84,6 +87,7 @@ export type CameraNodeMinAggregateInputType = {
   latitude?: true
   longitude?: true
   isActive?: true
+  topic?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +98,7 @@ export type CameraNodeMaxAggregateInputType = {
   latitude?: true
   longitude?: true
   isActive?: true
+  topic?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,6 +109,7 @@ export type CameraNodeCountAggregateInputType = {
   latitude?: true
   longitude?: true
   isActive?: true
+  topic?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -201,6 +207,7 @@ export type CameraNodeGroupByOutputType = {
   latitude: number
   longitude: number
   isActive: boolean
+  topic: string
   createdAt: Date
   updatedAt: Date
   _count: CameraNodeCountAggregateOutputType | null
@@ -234,6 +241,7 @@ export type CameraNodeWhereInput = {
   latitude?: Prisma.FloatFilter<"CameraNode"> | number
   longitude?: Prisma.FloatFilter<"CameraNode"> | number
   isActive?: Prisma.BoolFilter<"CameraNode"> | boolean
+  topic?: Prisma.StringFilter<"CameraNode"> | string
   createdAt?: Prisma.DateTimeFilter<"CameraNode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CameraNode"> | Date | string
   incidents?: Prisma.IncidentListRelationFilter
@@ -245,6 +253,7 @@ export type CameraNodeOrderByWithRelationInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  topic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   incidents?: Prisma.IncidentOrderByRelationAggregateInput
@@ -259,6 +268,7 @@ export type CameraNodeWhereUniqueInput = Prisma.AtLeast<{
   latitude?: Prisma.FloatFilter<"CameraNode"> | number
   longitude?: Prisma.FloatFilter<"CameraNode"> | number
   isActive?: Prisma.BoolFilter<"CameraNode"> | boolean
+  topic?: Prisma.StringFilter<"CameraNode"> | string
   createdAt?: Prisma.DateTimeFilter<"CameraNode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CameraNode"> | Date | string
   incidents?: Prisma.IncidentListRelationFilter
@@ -270,6 +280,7 @@ export type CameraNodeOrderByWithAggregationInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  topic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CameraNodeCountOrderByAggregateInput
@@ -288,6 +299,7 @@ export type CameraNodeScalarWhereWithAggregatesInput = {
   latitude?: Prisma.FloatWithAggregatesFilter<"CameraNode"> | number
   longitude?: Prisma.FloatWithAggregatesFilter<"CameraNode"> | number
   isActive?: Prisma.BoolWithAggregatesFilter<"CameraNode"> | boolean
+  topic?: Prisma.StringWithAggregatesFilter<"CameraNode"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CameraNode"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CameraNode"> | Date | string
 }
@@ -298,6 +310,7 @@ export type CameraNodeCreateInput = {
   latitude: number
   longitude: number
   isActive?: boolean
+  topic?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   incidents?: Prisma.IncidentCreateNestedManyWithoutCameraInput
@@ -309,6 +322,7 @@ export type CameraNodeUncheckedCreateInput = {
   latitude: number
   longitude: number
   isActive?: boolean
+  topic?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   incidents?: Prisma.IncidentUncheckedCreateNestedManyWithoutCameraInput
@@ -320,6 +334,7 @@ export type CameraNodeUpdateInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   incidents?: Prisma.IncidentUpdateManyWithoutCameraNestedInput
@@ -331,6 +346,7 @@ export type CameraNodeUncheckedUpdateInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   incidents?: Prisma.IncidentUncheckedUpdateManyWithoutCameraNestedInput
@@ -342,6 +358,7 @@ export type CameraNodeCreateManyInput = {
   latitude: number
   longitude: number
   isActive?: boolean
+  topic?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -352,6 +369,7 @@ export type CameraNodeUpdateManyMutationInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -362,6 +380,7 @@ export type CameraNodeUncheckedUpdateManyInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -372,6 +391,7 @@ export type CameraNodeCountOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  topic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -387,6 +407,7 @@ export type CameraNodeMaxOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  topic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -397,6 +418,7 @@ export type CameraNodeMinOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  topic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -451,6 +473,7 @@ export type CameraNodeCreateWithoutIncidentsInput = {
   latitude: number
   longitude: number
   isActive?: boolean
+  topic?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -461,6 +484,7 @@ export type CameraNodeUncheckedCreateWithoutIncidentsInput = {
   latitude: number
   longitude: number
   isActive?: boolean
+  topic?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -487,6 +511,7 @@ export type CameraNodeUpdateWithoutIncidentsInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -497,6 +522,7 @@ export type CameraNodeUncheckedUpdateWithoutIncidentsInput = {
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -538,6 +564,7 @@ export type CameraNodeSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   latitude?: boolean
   longitude?: boolean
   isActive?: boolean
+  topic?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   incidents?: boolean | Prisma.CameraNode$incidentsArgs<ExtArgs>
@@ -550,6 +577,7 @@ export type CameraNodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   latitude?: boolean
   longitude?: boolean
   isActive?: boolean
+  topic?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["cameraNode"]>
@@ -560,6 +588,7 @@ export type CameraNodeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   latitude?: boolean
   longitude?: boolean
   isActive?: boolean
+  topic?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["cameraNode"]>
@@ -570,11 +599,12 @@ export type CameraNodeSelectScalar = {
   latitude?: boolean
   longitude?: boolean
   isActive?: boolean
+  topic?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CameraNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "locationTag" | "latitude" | "longitude" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["cameraNode"]>
+export type CameraNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "locationTag" | "latitude" | "longitude" | "isActive" | "topic" | "createdAt" | "updatedAt", ExtArgs["result"]["cameraNode"]>
 export type CameraNodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   incidents?: boolean | Prisma.CameraNode$incidentsArgs<ExtArgs>
   _count?: boolean | Prisma.CameraNodeCountOutputTypeDefaultArgs<ExtArgs>
@@ -593,6 +623,7 @@ export type $CameraNodePayload<ExtArgs extends runtime.Types.Extensions.Internal
     latitude: number
     longitude: number
     isActive: boolean
+    topic: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["cameraNode"]>
@@ -1024,6 +1055,7 @@ export interface CameraNodeFieldRefs {
   readonly latitude: Prisma.FieldRef<"CameraNode", 'Float'>
   readonly longitude: Prisma.FieldRef<"CameraNode", 'Float'>
   readonly isActive: Prisma.FieldRef<"CameraNode", 'Boolean'>
+  readonly topic: Prisma.FieldRef<"CameraNode", 'String'>
   readonly createdAt: Prisma.FieldRef<"CameraNode", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CameraNode", 'DateTime'>
 }

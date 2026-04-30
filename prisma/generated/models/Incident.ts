@@ -47,6 +47,7 @@ export type IncidentMinAggregateOutputType = {
   topic: string | null
   location: string | null
   detectedAt: Date | null
+  dispatchedAt: Date | null
   resolvedAt: Date | null
   notes: string | null
   createdAt: Date | null
@@ -64,6 +65,7 @@ export type IncidentMaxAggregateOutputType = {
   topic: string | null
   location: string | null
   detectedAt: Date | null
+  dispatchedAt: Date | null
   resolvedAt: Date | null
   notes: string | null
   createdAt: Date | null
@@ -81,6 +83,7 @@ export type IncidentCountAggregateOutputType = {
   topic: number
   location: number
   detectedAt: number
+  dispatchedAt: number
   resolvedAt: number
   notes: number
   createdAt: number
@@ -110,6 +113,7 @@ export type IncidentMinAggregateInputType = {
   topic?: true
   location?: true
   detectedAt?: true
+  dispatchedAt?: true
   resolvedAt?: true
   notes?: true
   createdAt?: true
@@ -127,6 +131,7 @@ export type IncidentMaxAggregateInputType = {
   topic?: true
   location?: true
   detectedAt?: true
+  dispatchedAt?: true
   resolvedAt?: true
   notes?: true
   createdAt?: true
@@ -144,6 +149,7 @@ export type IncidentCountAggregateInputType = {
   topic?: true
   location?: true
   detectedAt?: true
+  dispatchedAt?: true
   resolvedAt?: true
   notes?: true
   createdAt?: true
@@ -248,6 +254,7 @@ export type IncidentGroupByOutputType = {
   topic: string
   location: string
   detectedAt: Date
+  dispatchedAt: Date | null
   resolvedAt: Date | null
   notes: string | null
   createdAt: Date
@@ -288,6 +295,7 @@ export type IncidentWhereInput = {
   topic?: Prisma.StringFilter<"Incident"> | string
   location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
+  dispatchedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
@@ -307,6 +315,7 @@ export type IncidentOrderByWithRelationInput = {
   topic?: Prisma.SortOrder
   location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
+  dispatchedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -329,6 +338,7 @@ export type IncidentWhereUniqueInput = Prisma.AtLeast<{
   topic?: Prisma.StringFilter<"Incident"> | string
   location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
+  dispatchedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
@@ -348,6 +358,7 @@ export type IncidentOrderByWithAggregationInput = {
   topic?: Prisma.SortOrder
   location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
+  dispatchedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -373,6 +384,7 @@ export type IncidentScalarWhereWithAggregatesInput = {
   topic?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   location?: Prisma.StringWithAggregatesFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeWithAggregatesFilter<"Incident"> | Date | string
+  dispatchedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Incident"> | Date | string | null
   resolvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Incident"> | Date | string
@@ -388,6 +400,7 @@ export type IncidentCreateInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -407,6 +420,7 @@ export type IncidentUncheckedCreateInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -422,6 +436,7 @@ export type IncidentUpdateInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -441,6 +456,7 @@ export type IncidentUncheckedUpdateInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -458,6 +474,7 @@ export type IncidentCreateManyInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -473,6 +490,7 @@ export type IncidentUpdateManyMutationInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -490,6 +508,7 @@ export type IncidentUncheckedUpdateManyInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -517,6 +536,7 @@ export type IncidentCountOrderByAggregateInput = {
   topic?: Prisma.SortOrder
   location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
+  dispatchedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -539,6 +559,7 @@ export type IncidentMaxOrderByAggregateInput = {
   topic?: Prisma.SortOrder
   location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
+  dispatchedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -556,6 +577,7 @@ export type IncidentMinOrderByAggregateInput = {
   topic?: Prisma.SortOrder
   location?: Prisma.SortOrder
   detectedAt?: Prisma.SortOrder
+  dispatchedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -680,6 +702,7 @@ export type IncidentCreateWithoutCameraInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -697,6 +720,7 @@ export type IncidentUncheckedCreateWithoutCameraInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -743,6 +767,7 @@ export type IncidentScalarWhereInput = {
   topic?: Prisma.StringFilter<"Incident"> | string
   location?: Prisma.StringFilter<"Incident"> | string
   detectedAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
+  dispatchedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   resolvedAt?: Prisma.DateTimeNullableFilter<"Incident"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Incident"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Incident"> | Date | string
@@ -758,6 +783,7 @@ export type IncidentCreateWithoutAgencyInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -775,6 +801,7 @@ export type IncidentUncheckedCreateWithoutAgencyInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -817,6 +844,7 @@ export type IncidentCreateManyCameraInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -832,6 +860,7 @@ export type IncidentUpdateWithoutCameraInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,6 +878,7 @@ export type IncidentUncheckedUpdateWithoutCameraInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -865,6 +895,7 @@ export type IncidentUncheckedUpdateManyWithoutCameraInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -881,6 +912,7 @@ export type IncidentCreateManyAgencyInput = {
   topic?: string
   location?: string
   detectedAt?: Date | string
+  dispatchedAt?: Date | string | null
   resolvedAt?: Date | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -896,6 +928,7 @@ export type IncidentUpdateWithoutAgencyInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -913,6 +946,7 @@ export type IncidentUncheckedUpdateWithoutAgencyInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -929,6 +963,7 @@ export type IncidentUncheckedUpdateManyWithoutAgencyInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   detectedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dispatchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -948,6 +983,7 @@ export type IncidentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   topic?: boolean
   location?: boolean
   detectedAt?: boolean
+  dispatchedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
@@ -967,6 +1003,7 @@ export type IncidentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   topic?: boolean
   location?: boolean
   detectedAt?: boolean
+  dispatchedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
@@ -986,6 +1023,7 @@ export type IncidentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   topic?: boolean
   location?: boolean
   detectedAt?: boolean
+  dispatchedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
@@ -1005,13 +1043,14 @@ export type IncidentSelectScalar = {
   topic?: boolean
   location?: boolean
   detectedAt?: boolean
+  dispatchedAt?: boolean
   resolvedAt?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "agencyId" | "severity" | "confidence" | "imageUrl" | "status" | "topic" | "location" | "detectedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
+export type IncidentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cameraId" | "agencyId" | "severity" | "confidence" | "imageUrl" | "status" | "topic" | "location" | "detectedAt" | "dispatchedAt" | "resolvedAt" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["incident"]>
 export type IncidentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   camera?: boolean | Prisma.CameraNodeDefaultArgs<ExtArgs>
   agency?: boolean | Prisma.Incident$agencyArgs<ExtArgs>
@@ -1042,6 +1081,7 @@ export type $IncidentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     topic: string
     location: string
     detectedAt: Date
+    dispatchedAt: Date | null
     resolvedAt: Date | null
     notes: string | null
     createdAt: Date
@@ -1481,6 +1521,7 @@ export interface IncidentFieldRefs {
   readonly topic: Prisma.FieldRef<"Incident", 'String'>
   readonly location: Prisma.FieldRef<"Incident", 'String'>
   readonly detectedAt: Prisma.FieldRef<"Incident", 'DateTime'>
+  readonly dispatchedAt: Prisma.FieldRef<"Incident", 'DateTime'>
   readonly resolvedAt: Prisma.FieldRef<"Incident", 'DateTime'>
   readonly notes: Prisma.FieldRef<"Incident", 'String'>
   readonly createdAt: Prisma.FieldRef<"Incident", 'DateTime'>

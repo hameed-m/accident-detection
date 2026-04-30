@@ -9,7 +9,7 @@ export default defineNitroPlugin((nitroApp) => {
   client.on("connect", () => {
     console.log("✅ Nuxt Background Worker: Connected to MQTT Broker");
     // Subscribe to all Eastern Province alerts using the wildcard
-    client.subscribe("sa/ep/#");
+    client.subscribe("nws7D1IJ/sa/ep/#");
   });
 
   client.on("message", async (topic, payload) => {

@@ -78,6 +78,7 @@ export const CameraNodeScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   isActive: 'isActive',
+  topic: 'topic',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -96,6 +97,7 @@ export const IncidentScalarFieldEnum = {
   topic: 'topic',
   location: 'location',
   detectedAt: 'detectedAt',
+  dispatchedAt: 'dispatchedAt',
   resolvedAt: 'resolvedAt',
   notes: 'notes',
   createdAt: 'createdAt',

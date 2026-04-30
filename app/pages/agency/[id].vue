@@ -99,12 +99,6 @@
               <div
                 class="bg-white/80 dark:bg-slate-800/50 rounded-xl p-3.5 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col items-center justify-center text-center">
                 <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1.5">
-                  Vehicles</p>
-                <p class="font-black text-slate-900 dark:text-white">{{ sit.vehiclesInvolved }}</p>
-              </div>
-              <div
-                class="bg-white/80 dark:bg-slate-800/50 rounded-xl p-3.5 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col items-center justify-center text-center">
-                <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1.5">
                   Confidence</p>
                 <p class="font-black text-slate-900 dark:text-white">{{ sit.confidence }}</p>
               </div>
@@ -114,7 +108,7 @@
               <div class="flex flex-col sm:flex-row gap-3">
                 <UButton color="error" variant="solid" icon="i-lucide-truck"
                   class="flex-1 justify-center py-2.5 text-base font-bold shadow-md shadow-red-500/20"
-                  @click="handleSituation(sit.id)">
+                  @click="dispatchIncident(sit.id)">
                   Dispatch Units
                 </UButton>
                 <UButton color="neutral" variant="soft" icon="i-lucide-x"
@@ -158,7 +152,8 @@ const agencyId = route.params.id
 const { data: agency } = await useFetch(`/api/agencies/${agencyId}`);
 const { data: unhandledIncidents } = await useFetch('/api/incidents', {
   query: {
-    status: 'UNHANDLED'
+    status: 'UNHANDLED',
+    topic: agency.value?.topic,
   }
 });
 
@@ -235,26 +230,26 @@ const logColumns = [
   }
 ]
 
-// Mock Action Handlers
-const handleSituation = (id) => {
-  const index = allSituations.value.findIndex(s => s.id === id)
-  allSituations.value[index] = {
-    ...allSituations.value[index],
-    status: 'handled',
-    handledAt: new Date().toISOString(),
-    notes: 'Handled from dashboard'
-  }
+
+const dispatchIncident = (id) => {
+  $fetch(`/api/incidents/${id}`, {
+    method: "PUT",
+    body: {
+      status: "DISPATCHED",
+      agencyId: agencyId,
+      dispatchedAt: new Date().toISOString(),
+    }
+  })
 }
 
 const ignoreSituation = (id) => {
-  const index = allSituations.value.findIndex(s => s.id === id)
-  if (index !== -1) {
-    allSituations.value[index] = {
-      ...allSituations.value[index],
-      status: 'handled',
+  $fetch(`/api/incidents/${id}`, {
+    method: "PUT",
+    body: {
+      status: "FALSE_ALARM",
+      agencyId: agencyId,
       handledAt: new Date().toISOString(),
-      notes: 'Marked as false alarm'
     }
-  }
+  })
 }
 </script>
