@@ -31,8 +31,28 @@ export default defineNitroPlugin((nitroApp) => {
         },
       });
       console.log("💾 Incident successfully saved to database.");
+
+      // Push to the live MQTT log buffer
+      pushMqttLog({
+        topic,
+        severity: data.severity,
+        confidence: data.confidence,
+        deviceId: data.device_id,
+        status: "saved",
+        message: `Incident saved — severity ${data.severity}, confidence ${data.confidence}%`,
+      });
     } catch (error) {
       console.error("❌ Error processing MQTT message:", error);
+
+      // Log the error to the live buffer too
+      pushMqttLog({
+        topic,
+        severity: 0,
+        confidence: 0,
+        deviceId: "unknown",
+        status: "error",
+        message: `Failed to process: ${error instanceof Error ? error.message : String(error)}`,
+      });
     }
   });
 });

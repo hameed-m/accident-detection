@@ -59,6 +59,17 @@
         </UCard>
       </NuxtLink>
     </div>
+
+    <!-- MQTT Live Log -->
+    <div class="mt-12">
+      <div class="mb-5 flex items-center gap-3">
+        <UIcon name="i-lucide-activity" class="w-5 h-5 text-primary-500" />
+        <h2 class="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+          Live Incident Feed
+        </h2>
+      </div>
+      <MqttLiveLog />
+    </div>
   </div>
 </template>
 

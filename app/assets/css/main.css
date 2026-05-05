@@ -15,6 +15,14 @@
   --color-green-800: #016538;
   --color-green-900: #0a5331;
   --color-green-950: #052e16;
+
+
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.6); }
 }
 
 @layer components {
@@ -27,11 +35,30 @@
   .nested-card {
     @apply flex flex-col gap-1.5 p-3 rounded-xl bg-gray-50 dark:bg-neutral-950/50 border border-gray-100 dark:border-white/5;
   }
-  /* .nested-card span:first-child {
-    @apply text-[0.65rem] text-gray-500 dark:text-gray-400 font-bold flex items-center gap-1.5 uppercase tracking-wider
-  }
+}
 
-  .nested-card span:nth-child(2) {
-    @apply font-medium text-gray-900 dark:text-white text-sm mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis
-  } */
+/* Thin scrollbar utility */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-300) transparent;
+
+  @variant dark {
+    scrollbar-color: var(--color-slate-700) transparent;
+  }
+}
+
+/* Vue TransitionGroup: MQTT log entries */
+@layer components {
+  .log-entry-enter-active {
+    @apply transition-all duration-300 ease-out;
+  }
+  .log-entry-enter-from {
+    @apply opacity-0 translate-y-2;
+  }
+  .log-entry-leave-active {
+    @apply transition-all duration-200 ease-in;
+  }
+  .log-entry-leave-to {
+    @apply opacity-0 -translate-x-3;
+  }
 }
