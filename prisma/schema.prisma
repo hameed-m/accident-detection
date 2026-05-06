@@ -8,7 +8,7 @@ datasource db {
 }
 
 model CameraNode {
-    id          String     @id @default(uuid())
+    id          Int        @id @default(autoincrement())
     locationTag String
     latitude    Float
     longitude   Float
@@ -29,7 +29,7 @@ enum IncidentStatus {
 
 model Incident {
     id       String     @id @default(uuid())
-    cameraId String
+    cameraId Int
     camera   CameraNode @relation(fields: [cameraId], references: [id])
 
     agencyId String?

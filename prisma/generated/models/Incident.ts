@@ -27,18 +27,20 @@ export type AggregateIncident = {
 }
 
 export type IncidentAvgAggregateOutputType = {
+  cameraId: number | null
   severity: number | null
   confidence: number | null
 }
 
 export type IncidentSumAggregateOutputType = {
+  cameraId: number | null
   severity: number | null
   confidence: number | null
 }
 
 export type IncidentMinAggregateOutputType = {
   id: string | null
-  cameraId: string | null
+  cameraId: number | null
   agencyId: string | null
   severity: number | null
   confidence: number | null
@@ -56,7 +58,7 @@ export type IncidentMinAggregateOutputType = {
 
 export type IncidentMaxAggregateOutputType = {
   id: string | null
-  cameraId: string | null
+  cameraId: number | null
   agencyId: string | null
   severity: number | null
   confidence: number | null
@@ -93,11 +95,13 @@ export type IncidentCountAggregateOutputType = {
 
 
 export type IncidentAvgAggregateInputType = {
+  cameraId?: true
   severity?: true
   confidence?: true
 }
 
 export type IncidentSumAggregateInputType = {
+  cameraId?: true
   severity?: true
   confidence?: true
 }
@@ -245,7 +249,7 @@ export type IncidentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type IncidentGroupByOutputType = {
   id: string
-  cameraId: string
+  cameraId: number
   agencyId: string | null
   severity: number
   confidence: number
@@ -286,7 +290,7 @@ export type IncidentWhereInput = {
   OR?: Prisma.IncidentWhereInput[]
   NOT?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
   id?: Prisma.StringFilter<"Incident"> | string
-  cameraId?: Prisma.StringFilter<"Incident"> | string
+  cameraId?: Prisma.IntFilter<"Incident"> | number
   agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
@@ -329,7 +333,7 @@ export type IncidentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
   OR?: Prisma.IncidentWhereInput[]
   NOT?: Prisma.IncidentWhereInput | Prisma.IncidentWhereInput[]
-  cameraId?: Prisma.StringFilter<"Incident"> | string
+  cameraId?: Prisma.IntFilter<"Incident"> | number
   agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
@@ -375,7 +379,7 @@ export type IncidentScalarWhereWithAggregatesInput = {
   OR?: Prisma.IncidentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.IncidentScalarWhereWithAggregatesInput | Prisma.IncidentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Incident"> | string
-  cameraId?: Prisma.StringWithAggregatesFilter<"Incident"> | string
+  cameraId?: Prisma.IntWithAggregatesFilter<"Incident"> | number
   agencyId?: Prisma.StringNullableWithAggregatesFilter<"Incident"> | string | null
   severity?: Prisma.IntWithAggregatesFilter<"Incident"> | number
   confidence?: Prisma.IntWithAggregatesFilter<"Incident"> | number
@@ -411,7 +415,7 @@ export type IncidentCreateInput = {
 
 export type IncidentUncheckedCreateInput = {
   id?: string
-  cameraId: string
+  cameraId: number
   agencyId?: string | null
   severity: number
   confidence: number
@@ -447,7 +451,7 @@ export type IncidentUpdateInput = {
 
 export type IncidentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.IntFieldUpdateOperationsInput | number
   agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
@@ -465,7 +469,7 @@ export type IncidentUncheckedUpdateInput = {
 
 export type IncidentCreateManyInput = {
   id?: string
-  cameraId: string
+  cameraId: number
   agencyId?: string | null
   severity: number
   confidence: number
@@ -499,7 +503,7 @@ export type IncidentUpdateManyMutationInput = {
 
 export type IncidentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.IntFieldUpdateOperationsInput | number
   agencyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
@@ -544,6 +548,7 @@ export type IncidentCountOrderByAggregateInput = {
 }
 
 export type IncidentAvgOrderByAggregateInput = {
+  cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
 }
@@ -585,6 +590,7 @@ export type IncidentMinOrderByAggregateInput = {
 }
 
 export type IncidentSumOrderByAggregateInput = {
+  cameraId?: Prisma.SortOrder
   severity?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
 }
@@ -629,14 +635,6 @@ export type IncidentUncheckedUpdateManyWithoutCameraNestedInput = {
   update?: Prisma.IncidentUpdateWithWhereUniqueWithoutCameraInput | Prisma.IncidentUpdateWithWhereUniqueWithoutCameraInput[]
   updateMany?: Prisma.IncidentUpdateManyWithWhereWithoutCameraInput | Prisma.IncidentUpdateManyWithWhereWithoutCameraInput[]
   deleteMany?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type EnumIncidentStatusFieldUpdateOperationsInput = {
@@ -758,7 +756,7 @@ export type IncidentScalarWhereInput = {
   OR?: Prisma.IncidentScalarWhereInput[]
   NOT?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
   id?: Prisma.StringFilter<"Incident"> | string
-  cameraId?: Prisma.StringFilter<"Incident"> | string
+  cameraId?: Prisma.IntFilter<"Incident"> | number
   agencyId?: Prisma.StringNullableFilter<"Incident"> | string | null
   severity?: Prisma.IntFilter<"Incident"> | number
   confidence?: Prisma.IntFilter<"Incident"> | number
@@ -793,7 +791,7 @@ export type IncidentCreateWithoutAgencyInput = {
 
 export type IncidentUncheckedCreateWithoutAgencyInput = {
   id?: string
-  cameraId: string
+  cameraId: number
   severity: number
   confidence: number
   imageUrl: string
@@ -904,7 +902,7 @@ export type IncidentUncheckedUpdateManyWithoutCameraInput = {
 
 export type IncidentCreateManyAgencyInput = {
   id?: string
-  cameraId: string
+  cameraId: number
   severity: number
   confidence: number
   imageUrl: string
@@ -938,7 +936,7 @@ export type IncidentUpdateWithoutAgencyInput = {
 
 export type IncidentUncheckedUpdateWithoutAgencyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.IntFieldUpdateOperationsInput | number
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -955,7 +953,7 @@ export type IncidentUncheckedUpdateWithoutAgencyInput = {
 
 export type IncidentUncheckedUpdateManyWithoutAgencyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cameraId?: Prisma.StringFieldUpdateOperationsInput | string
+  cameraId?: Prisma.IntFieldUpdateOperationsInput | number
   severity?: Prisma.IntFieldUpdateOperationsInput | number
   confidence?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1072,7 +1070,7 @@ export type $IncidentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    cameraId: string
+    cameraId: number
     agencyId: string | null
     severity: number
     confidence: number
@@ -1512,7 +1510,7 @@ export interface Prisma__IncidentClient<T, Null = never, ExtArgs extends runtime
  */
 export interface IncidentFieldRefs {
   readonly id: Prisma.FieldRef<"Incident", 'String'>
-  readonly cameraId: Prisma.FieldRef<"Incident", 'String'>
+  readonly cameraId: Prisma.FieldRef<"Incident", 'Int'>
   readonly agencyId: Prisma.FieldRef<"Incident", 'String'>
   readonly severity: Prisma.FieldRef<"Incident", 'Int'>
   readonly confidence: Prisma.FieldRef<"Incident", 'Int'>

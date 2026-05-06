@@ -27,17 +27,19 @@ export type AggregateCameraNode = {
 }
 
 export type CameraNodeAvgAggregateOutputType = {
+  id: number | null
   latitude: number | null
   longitude: number | null
 }
 
 export type CameraNodeSumAggregateOutputType = {
+  id: number | null
   latitude: number | null
   longitude: number | null
 }
 
 export type CameraNodeMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   locationTag: string | null
   latitude: number | null
   longitude: number | null
@@ -48,7 +50,7 @@ export type CameraNodeMinAggregateOutputType = {
 }
 
 export type CameraNodeMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   locationTag: string | null
   latitude: number | null
   longitude: number | null
@@ -72,11 +74,13 @@ export type CameraNodeCountAggregateOutputType = {
 
 
 export type CameraNodeAvgAggregateInputType = {
+  id?: true
   latitude?: true
   longitude?: true
 }
 
 export type CameraNodeSumAggregateInputType = {
+  id?: true
   latitude?: true
   longitude?: true
 }
@@ -202,7 +206,7 @@ export type CameraNodeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type CameraNodeGroupByOutputType = {
-  id: string
+  id: number
   locationTag: string
   latitude: number
   longitude: number
@@ -236,7 +240,7 @@ export type CameraNodeWhereInput = {
   AND?: Prisma.CameraNodeWhereInput | Prisma.CameraNodeWhereInput[]
   OR?: Prisma.CameraNodeWhereInput[]
   NOT?: Prisma.CameraNodeWhereInput | Prisma.CameraNodeWhereInput[]
-  id?: Prisma.StringFilter<"CameraNode"> | string
+  id?: Prisma.IntFilter<"CameraNode"> | number
   locationTag?: Prisma.StringFilter<"CameraNode"> | string
   latitude?: Prisma.FloatFilter<"CameraNode"> | number
   longitude?: Prisma.FloatFilter<"CameraNode"> | number
@@ -260,7 +264,7 @@ export type CameraNodeOrderByWithRelationInput = {
 }
 
 export type CameraNodeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.CameraNodeWhereInput | Prisma.CameraNodeWhereInput[]
   OR?: Prisma.CameraNodeWhereInput[]
   NOT?: Prisma.CameraNodeWhereInput | Prisma.CameraNodeWhereInput[]
@@ -294,7 +298,7 @@ export type CameraNodeScalarWhereWithAggregatesInput = {
   AND?: Prisma.CameraNodeScalarWhereWithAggregatesInput | Prisma.CameraNodeScalarWhereWithAggregatesInput[]
   OR?: Prisma.CameraNodeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CameraNodeScalarWhereWithAggregatesInput | Prisma.CameraNodeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"CameraNode"> | string
+  id?: Prisma.IntWithAggregatesFilter<"CameraNode"> | number
   locationTag?: Prisma.StringWithAggregatesFilter<"CameraNode"> | string
   latitude?: Prisma.FloatWithAggregatesFilter<"CameraNode"> | number
   longitude?: Prisma.FloatWithAggregatesFilter<"CameraNode"> | number
@@ -305,7 +309,6 @@ export type CameraNodeScalarWhereWithAggregatesInput = {
 }
 
 export type CameraNodeCreateInput = {
-  id?: string
   locationTag: string
   latitude: number
   longitude: number
@@ -317,7 +320,7 @@ export type CameraNodeCreateInput = {
 }
 
 export type CameraNodeUncheckedCreateInput = {
-  id?: string
+  id?: number
   locationTag: string
   latitude: number
   longitude: number
@@ -329,7 +332,6 @@ export type CameraNodeUncheckedCreateInput = {
 }
 
 export type CameraNodeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -341,7 +343,7 @@ export type CameraNodeUpdateInput = {
 }
 
 export type CameraNodeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -353,7 +355,7 @@ export type CameraNodeUncheckedUpdateInput = {
 }
 
 export type CameraNodeCreateManyInput = {
-  id?: string
+  id?: number
   locationTag: string
   latitude: number
   longitude: number
@@ -364,7 +366,6 @@ export type CameraNodeCreateManyInput = {
 }
 
 export type CameraNodeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -375,7 +376,7 @@ export type CameraNodeUpdateManyMutationInput = {
 }
 
 export type CameraNodeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -397,6 +398,7 @@ export type CameraNodeCountOrderByAggregateInput = {
 }
 
 export type CameraNodeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
 }
@@ -424,6 +426,7 @@ export type CameraNodeMinOrderByAggregateInput = {
 }
 
 export type CameraNodeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
 }
@@ -453,6 +456,14 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type CameraNodeCreateNestedOneWithoutIncidentsInput = {
   create?: Prisma.XOR<Prisma.CameraNodeCreateWithoutIncidentsInput, Prisma.CameraNodeUncheckedCreateWithoutIncidentsInput>
   connectOrCreate?: Prisma.CameraNodeCreateOrConnectWithoutIncidentsInput
@@ -468,7 +479,6 @@ export type CameraNodeUpdateOneRequiredWithoutIncidentsNestedInput = {
 }
 
 export type CameraNodeCreateWithoutIncidentsInput = {
-  id?: string
   locationTag: string
   latitude: number
   longitude: number
@@ -479,7 +489,7 @@ export type CameraNodeCreateWithoutIncidentsInput = {
 }
 
 export type CameraNodeUncheckedCreateWithoutIncidentsInput = {
-  id?: string
+  id?: number
   locationTag: string
   latitude: number
   longitude: number
@@ -506,7 +516,6 @@ export type CameraNodeUpdateToOneWithWhereWithoutIncidentsInput = {
 }
 
 export type CameraNodeUpdateWithoutIncidentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -517,7 +526,7 @@ export type CameraNodeUpdateWithoutIncidentsInput = {
 }
 
 export type CameraNodeUncheckedUpdateWithoutIncidentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   locationTag?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.FloatFieldUpdateOperationsInput | number
   longitude?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -618,7 +627,7 @@ export type $CameraNodePayload<ExtArgs extends runtime.Types.Extensions.Internal
     incidents: Prisma.$IncidentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     locationTag: string
     latitude: number
     longitude: number
@@ -1050,7 +1059,7 @@ export interface Prisma__CameraNodeClient<T, Null = never, ExtArgs extends runti
  * Fields of the CameraNode model
  */
 export interface CameraNodeFieldRefs {
-  readonly id: Prisma.FieldRef<"CameraNode", 'String'>
+  readonly id: Prisma.FieldRef<"CameraNode", 'Int'>
   readonly locationTag: Prisma.FieldRef<"CameraNode", 'String'>
   readonly latitude: Prisma.FieldRef<"CameraNode", 'Float'>
   readonly longitude: Prisma.FieldRef<"CameraNode", 'Float'>

@@ -12,6 +12,24 @@
           </span>
         </NuxtLink>
         <div class="flex items-center gap-4">
+          <nav class="hidden sm:flex items-center gap-1">
+            <NuxtLink
+              to="/"
+              class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors"
+              exact-active-class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10"
+              inactive-class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+            >
+              Agencies
+            </NuxtLink>
+            <NuxtLink
+              to="/cameras"
+              class="px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors"
+              exact-active-class="text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10"
+              inactive-class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+            >
+              Cameras
+            </NuxtLink>
+          </nav>
           <UBadge color="success" variant="soft" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full font-medium">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success-400 opacity-75"></span>
