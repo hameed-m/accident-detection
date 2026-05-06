@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   return prisma.incident.findMany({
     where: {
       status: status as IncidentStatus,
-      topic: topic ? { startsWith: topic as string } : undefined
+      topic: topic ? { startsWith: String(topic).slice(0, -1) } : undefined
     },
   });
 });
